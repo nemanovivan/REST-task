@@ -1,0 +1,109 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="RU">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<title>Receipts</title>
+</head>
+<body>
+<table>
+    <th:block th:each = "receipt : ${receipts}">
+        <tr>
+            <td  th:text = "${receipt.getId()} "/>
+            <td  th:text = "${receipt.getCategory()} "/>
+            <td  th:text = "${receipt.getName()} "/>
+            <td  th:text = "${receipt.getNumber()} "/>
+            <td  th:text = "${receipt.getStore()} "/>
+            <td  th:text = "${receipt.getDateString()} "/>
+            <td  th:text = "${receipt.getTime()} "/>
+            <td  th:text = "${receipt.getPrice()} "/>
+        </tr>
+    </th:block>
+</table>
+<h3>Add new receipt</h3>
+<form th:object="${receipt}" method="POST" action="/add-receipt">
+    <table>
+        <tr>
+            <td><label>Category:</label></td>
+            <td>
+                <select th:field = "*{category}">
+                    <option value = "Food">Food</option>
+                    <option value = "Cloth">Cloth</option>
+                    <option value = "Electronics">Electronics</option>
+                    <option value = "Pharmacy">Pharmacy</option>
+                    <option value = "Beauty">Beauty</option>
+                    <option value = "Toys">Toys</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Name:</label></td>
+            <td><input type="text" th:field = "*{name}"/></td>
+        </tr>
+        <tr>
+            <td><label>Number:</label></td>
+            <td><input type="text" th:field = "*{number}"/></td>
+        </tr>
+        <tr>
+            <td><label>Store:</label></td>
+            <td><input type="text" th:field = "*{store}"/></td>
+        </tr>
+        <tr>
+            <td><label>Date(YYYY-MM-DD):</label></td>
+            <td><input type="text" th:field = "*{dateString}"/></td>
+        </tr>
+        <tr>
+            <td><label>Time(HH:MM:SS):</label></td>
+            <td><input type="text" th:field = "*{time}"/></td>
+        </tr>
+        <tr>
+            <td><label>Price:</label></td>
+            <td><input type="text" th:field = "*{price}"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="add">
+</form>
+<h3>H</h3>
+<table>
+    <tr>
+        <td><label>Count:</label></td>
+        <td th:text = "${count.getOutput()}" />
+    </tr>
+</table>
+<table>
+    <tr>
+        <form method = "GET", action="/get-sum-day">
+            <input type = "submit", value="count for today">
+        </form>
+    </tr>
+    <tr>
+        <form method="GET", action="/get-sum-week">
+            <input type="submit", value="count for week">
+        </form>
+    </tr>
+    <tr>
+        <form method="GET", action="/get-sum-month">
+            <input type="submit", value="count for month">
+        </form>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td><label>First category:</label></td>
+        <td th:text = "${count.getFirstCategory()}" />
+    </tr>
+    <tr>
+        <td><label>Second category:</label></td>
+        <td th:text = "${count.getSecondCategory()}" />
+    </tr>
+    <tr>
+        <td><label>Third category:</label></td>
+        <td th:text = "${count.getThirdCategory()}" />
+    </tr>
+</table>
+<form method = "GET", action="/get-three-cat">
+    <input type="submit", value="show three categories">
+</form>
+<form method = "GET", action="/delete">
+    <input type="submit", value="delete">
+</form>
+</body>
+</html>
